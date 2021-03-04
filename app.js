@@ -24,9 +24,14 @@ app.get("/", (req, res) => {
 app.post("/", (req, res) => {
 
   const item = req.body.newItem;
-
   items.push(item);
+  res.redirect("/");
 
+})
+
+app.post("/delete", (req, res) => {
+
+  items.pop();
   res.redirect("/");
 
 })
