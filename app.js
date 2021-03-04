@@ -1,9 +1,10 @@
 const express = require("express");
 const bodyParser = require("body-parser");
+const date = require(__dirname + "/date.js");
 
 const app = express();
 
-var items = ["Do exercise", "Eat breakfast", "Start work"];
+let items = ["Do exercise", "Eat breakfast", "Start work"];
 
 app.set('view engine', 'ejs');
 
@@ -12,14 +13,7 @@ app.use(express.static("public"));
 
 app.get("/", (req, res) => {
 
-  var today = new Date();
-  var options = {
-    weekday: "long",
-    day: "numeric",
-    month: "long"
-  };
-
-  var day = today.toLocaleDateString("en-US", options);
+  let day = date();
 
   res.render("list", {
     nameOfDay: day, newListItems: items
@@ -28,7 +22,7 @@ app.get("/", (req, res) => {
 });
 
 app.post("/", (req, res) => {
-  var item = req.body.newItem;
+  let item = req.body.newItem;
 
   items.push(item);
 
